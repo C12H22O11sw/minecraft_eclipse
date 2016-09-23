@@ -25,9 +25,9 @@ public class Block {
 		case 2:graphics.setColor(Color.green); break;
 		case 3:graphics.setColor(Color.blue); break;		
 		}	
-		graphics.fillRect(x, 800 - y, 16, 16);
+		graphics.fillRect(x*16, 800 - (y*16), 16, 16);
 		graphics.setColor(Color.black);
-		graphics.drawRect(x, 800-y, 16, 16);
+		graphics.drawRect(x*16, 800 - (y*16), 16, 16);
 	}
 }
 

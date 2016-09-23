@@ -16,8 +16,8 @@ public class GamePanel extends JPanel implements ActionListener{
 		int height = 20;
 		int heightTrend = 0;
 		int random;
-		int worldWidth = 100;
-		int worldHeight = 100;
+		static int worldWidth = 100;
+		static int worldHeight = 100;
 		int blockSize = 16;
 		
 		
@@ -25,9 +25,9 @@ public class GamePanel extends JPanel implements ActionListener{
 		boolean worldHasBeenGenerated = false;
 
 	Timer timer;
-	Block[][] blocks = new Block[worldWidth][worldHeight];
+	static Block[][] blocks = new Block[worldWidth][worldHeight];	Player player = new Player();
 	GamePanel(){
-		timer = new Timer(17,this);
+		timer = new Timer(50,this);
 		timer.start();
 	}
 	void getHeight(int method){
@@ -70,35 +70,24 @@ public class GamePanel extends JPanel implements ActionListener{
 					heightTrend = 0;
 				if(random > 90)
 					heightTrend = 1;
-			}
-			
-			
+			}	
 		}
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
 	void generateWorld(){
 		height = 20;
 		heightTrend = 0;
 		for(int x = 0; x< worldWidth; x++){
 			random = new Random().nextInt(100);
-			getHeight(2);
+			getHeight(1);
 			//heightTrend = 0;
 			height+=heightTrend;
 		
 			System.out.println(heightTrend);
 			for(int y = 0; y< worldHeight; y++){
 				if(y<height)
-					blocks[x][y] = new Block(x*(blockSize),y*(blockSize),2);
+					blocks[x][y] = new Block(x,y,2);
 				else
-					blocks[x][y] = new Block(x*(blockSize),y*(blockSize),3);
+					blocks[x][y] = new Block(x,y,3);
 			}
 		}
 	}
@@ -115,16 +104,16 @@ public class GamePanel extends JPanel implements ActionListener{
 	public void paintComponent(Graphics graphics){
 		if(!worldHasBeenGenerated){
 			generateWorld();
+			
 			worldHasBeenGenerated = true;
 		}
 		renderWorld(graphics);
-		
+		player.draw(graphics);
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		//System.out.println("timing");
 		repaint();	
-
 	}
 }

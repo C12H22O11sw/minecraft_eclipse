@@ -1,12 +1,16 @@
 package minecraft;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+
 import javax.swing.JFrame;
 
-public class GameWindow {
+public class GameWindow{
 	int width;
 	int height;
-	JFrame frame;
-	GamePanel gamepanel;
+	
+	JFrame frame;	GamePanel gamepanel;	Actions actions = new Actions();
+	
 	public static void main(String[] args) {
 		GameWindow window = new GameWindow(1080,800);
 	}
@@ -15,6 +19,7 @@ public class GameWindow {
 		this.height = height;
 		frame = new JFrame();
 		gamepanel = new GamePanel();
+		frame.addKeyListener(actions);
 		frame.add(gamepanel);
 		frame.setSize(width, height);
 		frame.setVisible(true);
@@ -22,6 +27,7 @@ public class GameWindow {
 
 	}
 	void update(){
+		
 	}
 
 }

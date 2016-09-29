@@ -12,8 +12,19 @@ public class Player {
 	int placeBlock;
 	int[] inventory = new int[10];
 	Player(){
-
+		
 	}
+	/*
+	 * instuctions
+	 * 
+	 * press a to move to the left and d for the right.
+	 * use
+	 * 
+	 * 
+	 * 
+	 * 
+	 * 
+	 * */
 	void update(){
 		if(Actions.keyIsPressed){
 			if(Actions.keyPressed == 'A' &&  GamePanel.blocks[x-1][y].type == 3){

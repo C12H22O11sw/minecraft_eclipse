@@ -78,7 +78,7 @@ public class GamePanel extends JPanel implements ActionListener{
 		heightTrend = 0;
 		for(int x = 0; x< worldWidth; x++){
 			random = new Random().nextInt(100);
-			getHeight(1);
+			getHeight(0);
 			//heightTrend = 0;
 			height+=heightTrend;
 		

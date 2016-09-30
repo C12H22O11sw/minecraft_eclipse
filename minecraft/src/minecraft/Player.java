@@ -18,11 +18,8 @@ public class Player {
 	 * instuctions
 	 * 
 	 * press a to move to the left and d for the right.
-	 * use
-	 * 
-	 * 
-	 * 
-	 * 
+	 * use the number pad to place/destroy blocks
+	 * press 3 to destroy blocks and 2 or 1 to place them.
 	 * 
 	 * */
 	void update(){

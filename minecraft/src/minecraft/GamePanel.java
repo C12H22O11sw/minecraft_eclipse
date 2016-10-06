@@ -82,7 +82,6 @@ public class GamePanel extends JPanel implements ActionListener{
 			//heightTrend = 0;
 			height+=heightTrend;
 		
-			System.out.println(heightTrend);
 			for(int y = 0; y< worldHeight; y++){
 				if(y<height)
 					blocks[x][y] = new Block(x,y,2);
@@ -113,7 +112,6 @@ public class GamePanel extends JPanel implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		//System.out.println("timing");
 		repaint();	
 	}
 }

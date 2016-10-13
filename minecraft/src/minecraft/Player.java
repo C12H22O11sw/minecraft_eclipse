@@ -3,8 +3,6 @@ package minecraft;
 import java.awt.Color;
 import java.awt.Graphics;
 
-import javax.swing.JOptionPane;
-
 public class Player {
 	int x = 10;
 	int y = 10;
@@ -24,11 +22,14 @@ public class Player {
 	 * 
 	 */
 	void placeBlock(int x, int y, int type) {
-		if (type == 3)
-			inventory[GamePanel.blocks[this.x + x][this.y + y].type]++;
-		GamePanel.blocks[this.x + x][this.y + y].type = type;// 1
-		System.out.println("0:"+inventory[0]+"; 1:"+inventory[1]+"; 2:"+inventory[2]);
+		if (inventory[type] > 0 || type == 3) {
+			if (type == 3)
+				inventory[GamePanel.blocks[this.x + x][this.y + y].type]++;
 
+			GamePanel.blocks[this.x + x][this.y + y].type = type;// 1
+			System.out.println("0:" + inventory[0] + "; 1:" + inventory[1] + "; 2:" + inventory[2]);
+			inventory[type]--;
+		}
 	}
 
 	void update() {
@@ -46,67 +47,84 @@ public class Player {
 			} else if (Actions.keyPressed == ' ') {
 				this.y++;
 			}
-			if (Actions.keyPressed == '1') {
+
+			switch (Actions.keyPressed) {
+
+			// block switching controls
+			case '0':
+				placeBlockType = 0;
+				break;
+			case '1':
 				placeBlockType = 1;
-			}else if (Actions.keyPressed == '2') {
+				break;
+			case '2':
 				placeBlockType = 2;
-			}else if (Actions.keyPressed == '3') {
+				break;
+			case '3':
 				placeBlockType = 3;
-			}else if (Actions.keyPressed == '0') {
-				placeBlockType = 3;
+				break;
+
+			// block placing controls
+			case 'a':
+				placeBlock(-1, -1, placeBlockType);
+				break;
+			case 'b':
+				placeBlock(0, -1, placeBlockType);
+				break;
+			case 'c':
+				placeBlock(1, -1, placeBlockType);
+				break;
+			case 'd':
+				placeBlock(-1, 0, placeBlockType);
+				break;
+			case 'f':
+				placeBlock(1, 0, placeBlockType);
+				break;
+			case 'g':
+				placeBlock(-1, 1, placeBlockType);
+				break;
+			case 'h':
+				placeBlock(0, 1, placeBlockType);
+				break;
+			case 'i':
+				placeBlock(1, 1, placeBlockType);
+				break;
+
 			}
 
-			if (Actions.keyPressed == 'a') {
-				placeBlock(-1, -1, placeBlockType);// 1
-			} else if (Actions.keyPressed == 'b') {
-				GamePanel.blocks[x][y - 1].type = placeBlockType;// 2
-			} else if (Actions.keyPressed == 'c') {
-				GamePanel.blocks[x + 1][y - 1].type = placeBlockType;// 3
-			} else if (Actions.keyPressed == 'd') {
-				GamePanel.blocks[x - 1][y].type = placeBlockType;// 4
-			} else if (Actions.keyPressed == 'f') {
-				GamePanel.blocks[x + 1][y].type = placeBlockType;// 6
-			} else if (Actions.keyPressed == 'g') {
-				GamePanel.blocks[x - 1][y + 1].type = placeBlockType;// 7
-			} else if (Actions.keyPressed == 'h') {
-				GamePanel.blocks[x][y + 1].type = placeBlockType;// 8
-			} else if (Actions.keyPressed == 'i') {
-				GamePanel.blocks[x + 1][y + 1].type = placeBlockType;// 9
-			}
 			Actions.keyIsPressed = false;
 		}
 
 		if (GamePanel.blocks[x][y - 1].type == 3) {
 			y--;
 		}
-		Actions.keyPressed = '?';
 	}
 
 	void draw(Graphics graphics) {
 		update();
 		graphics.setColor(Color.gray);
 		graphics.fillRect(x * 16, 800 - (y * 16), 16, 16);
-		
-		graphics.setColor(Color.DARK_GRAY);
+
+		graphics.setColor(Color.GRAY.darker());
 		graphics.fillRect(290, 700, 500, 50);
 		graphics.setColor(Color.gray);
-		graphics.fillRect(290-1, 700-1, 498, 48);
+		graphics.fillRect(290 - 1, 700 - 1, 498, 48);
 
-		graphics.setColor(Color.black);
+		Actions.drawInt(graphics, 100, 100, "01");
+
 		graphics.fillRect(299, 709, 32, 32);
 		graphics.setColor(Color.GRAY.darker());
 		graphics.fillRect(298, 708, 30, 30);
-		
+
 		graphics.setColor(Color.red.darker());
 		graphics.fillRect(349, 709, 32, 32);
 		graphics.setColor(Color.red);
 		graphics.fillRect(348, 708, 30, 30);
-		
+
 		graphics.setColor(Color.green.darker());
 		graphics.fillRect(399, 709, 32, 32);
 		graphics.setColor(Color.green);
 		graphics.fillRect(398, 708, 30, 30);
-
 
 	}
 }

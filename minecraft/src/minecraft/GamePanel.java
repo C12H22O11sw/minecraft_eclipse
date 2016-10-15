@@ -59,7 +59,7 @@ public class GamePanel extends JPanel implements ActionListener {
 
 			for (int y = 0; y < worldHeight; y++) {
 				if (y < height)
-					blocks[x][y] = new Block(x, y, new Random().nextInt(3));
+					blocks[x][y] = new Block(x, y, /*new Random().nextInt(3)*/2);
 				else
 					blocks[x][y] = new Block(x, y, 3);
 			}

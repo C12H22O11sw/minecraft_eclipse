@@ -45,7 +45,7 @@ public class Player {
 				this.x++;
 				this.y++;
 			} else if (Actions.keyPressed == ' ') {
-				this.y++;
+				this.y++; 
 			}
 
 			switch (Actions.keyPressed) {
@@ -68,25 +68,49 @@ public class Player {
 			case 'a':
 				placeBlock(-1, -1, placeBlockType);
 				break;
+			case '#':
+				placeBlock(-1, -1, placeBlockType);
+				break;
 			case 'b':
+				placeBlock(0, -1, placeBlockType);
+				break;			
+			case '(':
 				placeBlock(0, -1, placeBlockType);
 				break;
 			case 'c':
 				placeBlock(1, -1, placeBlockType);
 				break;
+			case '"':
+				placeBlock(1, -1, placeBlockType);
+				break;
 			case 'd':
+				placeBlock(-1, 0, placeBlockType);
+				break;
+			case '%':
 				placeBlock(-1, 0, placeBlockType);
 				break;
 			case 'f':
 				placeBlock(1, 0, placeBlockType);
 				break;
+			case (char)39:
+				placeBlock(1, 0, placeBlockType);
+				break;
 			case 'g':
+				placeBlock(-1, 1, placeBlockType);
+				break;
+			case '$':
 				placeBlock(-1, 1, placeBlockType);
 				break;
 			case 'h':
 				placeBlock(0, 1, placeBlockType);
 				break;
+			case '&':
+				placeBlock(0, 1, placeBlockType);
+				break;
 			case 'i':
+				placeBlock(1, 1, placeBlockType);
+				break;
+			case '!':
 				placeBlock(1, 1, placeBlockType);
 				break;
 
@@ -110,21 +134,23 @@ public class Player {
 		graphics.setColor(Color.gray);
 		graphics.fillRect(290 - 1, 700 - 1, 498, 48);
 
-		Actions.drawInt(graphics, 100, 100, "01");
+		
 
 		graphics.fillRect(299, 709, 32, 32);
 		graphics.setColor(Color.GRAY.darker());
 		graphics.fillRect(298, 708, 30, 30);
-
+		Actions.drawInt(graphics, 303, 726,inventory[0]+"");
+		
 		graphics.setColor(Color.red.darker());
 		graphics.fillRect(349, 709, 32, 32);
 		graphics.setColor(Color.red);
 		graphics.fillRect(348, 708, 30, 30);
-
+		Actions.drawInt(graphics, 353, 726,inventory[1]+"");
+		
 		graphics.setColor(Color.green.darker());
 		graphics.fillRect(399, 709, 32, 32);
 		graphics.setColor(Color.green);
 		graphics.fillRect(398, 708, 30, 30);
-
+		Actions.drawInt(graphics, 403, 726,inventory[2]+"");
 	}
 }

@@ -14,7 +14,7 @@ public class GamePanel extends JPanel implements ActionListener {
 	int height = 20;
 	int heightTrend = 0;
 	int random;
-	static int worldWidth = 100;
+	static int worldWidth = 120;
 	static int worldHeight = 100;
 	int blockSize = 16;
 
@@ -23,12 +23,14 @@ public class GamePanel extends JPanel implements ActionListener {
 	Timer timer;
 	static Block[][] blocks = new Block[worldWidth][worldHeight];
 	Player player = new Player();
-
+	Mob mob = new Mob();
 	GamePanel() {
 		timer = new Timer(50, this);
 		timer.start();
 	}
-
+	void makeTree(int x, int y){
+		blocks[x][y].type = 0;
+	}
 	void getHeight(int method) {
 		if (heightTrend == 0) {
 			if (random < 10)
@@ -55,14 +57,24 @@ public class GamePanel extends JPanel implements ActionListener {
 			random = new Random().nextInt(100);
 			getHeight(0);
 			// heightTrend = 0;
-			height += heightTrend;
-
+			if(height > 10)
+				height += heightTrend;
+			else
+				height++;
 			for (int y = 0; y < worldHeight; y++) {
 				if (y < height)
-					blocks[x][y] = new Block(x, y, /*new Random().nextInt(3)*/2);
+					if(y<7)
+						blocks[x][y] = new Block(x, y, /*new Random().nextInt(3)*/1);
+					else if(y<8+x%2)
+						blocks[x][y] = new Block(x, y, /*new Random().nextInt(3)*/3);
+					else if(y<10+x%2)
+						blocks[x][y] = new Block(x, y, /*new Random().nextInt(3)*/0);
+					else 
+						blocks[x][y] = new Block(x, y, /*new Random().nextInt(3)*/2);
 				else
 					blocks[x][y] = new Block(x, y, 3);
 			}
+
 		}
 	}
 
@@ -83,6 +95,7 @@ public class GamePanel extends JPanel implements ActionListener {
 		}
 		renderWorld(graphics);
 		player.draw(graphics);
+		mob.draw(graphics);
 	}
 
 	@Override

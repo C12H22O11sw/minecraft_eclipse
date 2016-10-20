@@ -15,8 +15,10 @@ public class Actions implements KeyListener, MouseListener {
 	static boolean mousePressed;
 	static int mouseX;
 	static int mouseY;
+	static long time;
+	static int panX;
+	static int panY;
 	static boolean[][][] text = new boolean[10][3][5];
-
 	{
 
 		text[0][0][0] = true;
@@ -38,23 +40,19 @@ public class Actions implements KeyListener, MouseListener {
 		text[1][0][0] = false;
 		text[1][1][0] = true;
 		text[1][2][0] = false;
-
 		text[1][0][1] = true;
 		text[1][1][1] = true;
 		text[1][2][1] = false;
-
 		text[1][0][2] = false;
 		text[1][1][2] = true;
 		text[1][2][2] = false;
-
 		text[1][0][3] = false;
 		text[1][1][3] = true;
 		text[1][2][3] = false;
-
 		text[1][0][4] = true;
 		text[1][1][4] = true;
 		text[1][2][4] = true;
-
+		
 		text[2][0][0] = true;
 		text[2][1][0] = true;
 		text[2][2][0] = true;
@@ -193,30 +191,18 @@ public class Actions implements KeyListener, MouseListener {
 		int digitValue = 0;
 		graphics.setColor(Color.lightGray);
 		for (int i = 0; i < display.length(); i++) {
-			System.out.println(keyPressed);
 			switch (display.charAt(i)) {
-			case '0':
-				digitValue = 0; break;
-			case '1':
-				digitValue = 1;break;
-			case '2':
-				digitValue = 2;break;
-			case '3':
-				digitValue = 3;break;
-			case '4':
-				digitValue = 4;break;
-			case '5':
-				digitValue = 5;break;
-			case '6':
-				digitValue = 6;break;
-			case '7':
-				digitValue = 7;break;
-			case '8':
-				digitValue = 8;break;
-			case '9':
-				digitValue = 9;break;
+			case '0':digitValue = 0; break;
+			case '1':digitValue = 1;break;
+			case '2':digitValue = 2;break;
+			case '3':digitValue = 3;break;
+			case '4':digitValue = 4;break;
+			case '5':digitValue = 5;break;
+			case '6':digitValue = 6;break;
+			case '7':digitValue = 7;break;
+			case '8':digitValue = 8;break;
+			case '9':digitValue = 9;break;
 			}
-			
 			for (int j = 0; j < 3; j++) {
 				for (int k = 0; k < 5; k++) {
 					if (text[digitValue][j][k])

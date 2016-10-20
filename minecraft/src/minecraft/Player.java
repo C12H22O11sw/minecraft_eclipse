@@ -2,14 +2,14 @@ package minecraft;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.Random;
 
 public class Player {
-	int x = 10;
-	int y = 10;
-	int type = 0;
+	static int x = 10;
+	static int y = 10;
 	int placeBlockType;
 	int[] inventory = new int[10];
-
+	
 	Player() {
 
 	}
@@ -33,6 +33,7 @@ public class Player {
 	}
 
 	void update() {
+		Actions.time++;
 		if (Actions.keyIsPressed) {
 			if (Actions.keyPressed == 'A' && GamePanel.blocks[x - 1][y].type == 3) {
 				this.x--;
@@ -119,38 +120,42 @@ public class Player {
 			Actions.keyIsPressed = false;
 		}
 
-		if (GamePanel.blocks[x][y - 1].type == 3) {
+		if (GamePanel.blocks[x][y - 1].type == 3 || GamePanel.blocks[x][y - 1].type == 1) {
 			y--;
 		}
 	}
-
+	double eyebrowY;
 	void draw(Graphics graphics) {
+		eyebrowY=Math.sin(Actions.time/50)*3;
 		update();
-		graphics.setColor(Color.gray);
-		graphics.fillRect(x * 16, 800 - (y * 16), 16, 16);
+		graphics.setColor(Color.cyan);
+		graphics.fillRect(x * 16, (GameWindow.height - (y * 16)), 16, 16);
+		if(Actions.time*Actions.time/2%200>10)
+			graphics.setColor(Color.BLACK);
+		graphics.fillRect(x * 16+3, GameWindow.height - (y * 16)+5, 3, 3);
+		graphics.fillRect(x * 16+10, GameWindow.height - (y * 16)+5, 3, 3);
 
 		graphics.setColor(Color.GRAY.darker());
-		graphics.fillRect(290, 700, 500, 50);
+		graphics.fillRect((GameWindow.width-500)/2,GameWindow.height - 100, 500, 50);
 		graphics.setColor(Color.gray);
-		graphics.fillRect(290 - 1, 700 - 1, 498, 48);
+		graphics.fillRect((GameWindow.width-500)/2 - 1, GameWindow.height - 101, 498, 48);
 
 		
-
-		graphics.fillRect(299, 709, 32, 32);
+		graphics.setColor(Color.black);
+		graphics.fillRect((GameWindow.width/2) - 241, GameWindow.height-91, 32, 32);
 		graphics.setColor(Color.GRAY.darker());
-		graphics.fillRect(298, 708, 30, 30);
-		Actions.drawInt(graphics, 303, 726,inventory[0]+"");
+		graphics.fillRect((GameWindow.width/2) - 242, GameWindow.height-92, 30, 30);
+		Actions.drawInt(graphics, (GameWindow.width/2) - 232, GameWindow.height-82,inventory[0]+"");
 		
 		graphics.setColor(Color.red.darker());
-		graphics.fillRect(349, 709, 32, 32);
+		graphics.fillRect((GameWindow.width/2) - 191, GameWindow.height-91, 32, 32);
 		graphics.setColor(Color.red);
-		graphics.fillRect(348, 708, 30, 30);
-		Actions.drawInt(graphics, 353, 726,inventory[1]+"");
+		graphics.fillRect((GameWindow.width/2) - 192, GameWindow.height-92, 30, 30);
+		Actions.drawInt(graphics, (GameWindow.width/2) - 182, GameWindow.height-82,inventory[1]+"");		
 		
 		graphics.setColor(Color.green.darker());
-		graphics.fillRect(399, 709, 32, 32);
+		graphics.fillRect((GameWindow.width/2) - 141, GameWindow.height-91, 32, 32);
 		graphics.setColor(Color.green);
-		graphics.fillRect(398, 708, 30, 30);
-		Actions.drawInt(graphics, 403, 726,inventory[2]+"");
-	}
+		graphics.fillRect((GameWindow.width/2) - 142, GameWindow.height-92, 30, 30);
+		Actions.drawInt(graphics, (GameWindow.width/2) - 132, GameWindow.height-82,inventory[2]+"");	}
 }

@@ -6,13 +6,13 @@ import java.awt.event.KeyListener;
 import javax.swing.JFrame;
 
 public class GameWindow{
-	int width;
-	int height;
+	static int width;
+	static int height;
 	
 	JFrame frame;	GamePanel gamepanel;	Actions actions = new Actions();
 	
 	public static void main(String[] args) {
-		GameWindow window = new GameWindow(1080,800);
+		GameWindow window = new GameWindow(1920,800);
 	}
 	GameWindow(int width, int height){
 		this.width = width;

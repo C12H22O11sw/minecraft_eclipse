@@ -2,14 +2,14 @@ package minecraft;
 
 import java.awt.Color;
 import java.awt.Graphics;
-import java.util.Random;
 
 public class Player {
 	static int x = 10;
 	static int y = 10;
 	int placeBlockType;
 	int[] inventory = new int[10];
-	
+	static float lives = 10;
+
 	Player() {
 
 	}
@@ -21,20 +21,29 @@ public class Player {
 	 * place/destroy blocks press 3 to destroy blocks and 2 or 1 to place them.
 	 * 
 	 */
+	void hurt() {
+		lives--;
+	}
+
 	void placeBlock(int x, int y, int type) {
 		if (inventory[type] > 0 || type == 3) {
 			if (type == 3)
 				inventory[GamePanel.blocks[this.x + x][this.y + y].type]++;
-
 			GamePanel.blocks[this.x + x][this.y + y].type = type;// 1
-			System.out.println("0:" + inventory[0] + "; 1:" + inventory[1] + "; 2:" + inventory[2]);
 			inventory[type]--;
 		}
 	}
 
 	void update() {
+		System.out.println(Actions.panX);
+
 		Actions.time++;
+		if ((x + Actions.panX - 1) * 16 > 1920)
+			Actions.panX -= 1920 / 16;
+		else if ((x + Actions.panX + 2) * 16 < 0)
+			Actions.panX += 1920 / 16;
 		if (Actions.keyIsPressed) {
+
 			if (Actions.keyPressed == 'A' && GamePanel.blocks[x - 1][y].type == 3) {
 				this.x--;
 			} else if (Actions.keyPressed == 'D' && GamePanel.blocks[x + 1][y].type == 3) {
@@ -46,7 +55,7 @@ public class Player {
 				this.x++;
 				this.y++;
 			} else if (Actions.keyPressed == ' ') {
-				this.y++; 
+				this.y++;
 			}
 
 			switch (Actions.keyPressed) {
@@ -64,7 +73,12 @@ public class Player {
 			case '3':
 				placeBlockType = 3;
 				break;
-
+			case '4':
+				placeBlockType = 4;
+				break;
+			case 'B':
+				hurt();
+				break;
 			// block placing controls
 			case 'a':
 				placeBlock(-1, -1, placeBlockType);
@@ -74,7 +88,7 @@ public class Player {
 				break;
 			case 'b':
 				placeBlock(0, -1, placeBlockType);
-				break;			
+				break;
 			case '(':
 				placeBlock(0, -1, placeBlockType);
 				break;
@@ -93,7 +107,7 @@ public class Player {
 			case 'f':
 				placeBlock(1, 0, placeBlockType);
 				break;
-			case (char)39:
+			case (char) 39:
 				placeBlock(1, 0, placeBlockType);
 				break;
 			case 'g':
@@ -124,38 +138,55 @@ public class Player {
 			y--;
 		}
 	}
+
 	double eyebrowY;
+
 	void draw(Graphics graphics) {
-		eyebrowY=Math.sin(Actions.time/50)*3;
+		eyebrowY = Math.sin(Actions.time / 50) * 3;
 		update();
-		graphics.setColor(Color.cyan);
-		graphics.fillRect(x * 16, (GameWindow.height - (y * 16)), 16, 16);
-		if(Actions.time*Actions.time/2%200>10)
-			graphics.setColor(Color.BLACK);
-		graphics.fillRect(x * 16+3, GameWindow.height - (y * 16)+5, 3, 3);
-		graphics.fillRect(x * 16+10, GameWindow.height - (y * 16)+5, 3, 3);
+		if (lives > 0) {
+			if (lives > 8) {
+				graphics.setColor(Color.green.darker().darker());
+				graphics.fillRect((x + Actions.panX) * 16, GameWindow.height - (y * 16) - 8, 16, 4);
+				graphics.setColor(Color.green);
+				graphics.fillRect((x + Actions.panX) * 16, GameWindow.height - (y * 16) - 8, (int) (lives * 1.6), 4);
 
-		graphics.setColor(Color.GRAY.darker());
-		graphics.fillRect((GameWindow.width-500)/2,GameWindow.height - 100, 500, 50);
+			} else if (lives > 3) {
+				graphics.setColor(Color.yellow.darker().darker());
+				graphics.fillRect((x + Actions.panX) * 16, GameWindow.height - (y * 16) - 8, 16, 4);
+				graphics.setColor(Color.yellow);
+				graphics.fillRect((x + Actions.panX) * 16, GameWindow.height - (y * 16) - 8, (int) (lives * 1.6), 4);
+			} else {
+				graphics.setColor(Color.red.darker().darker());
+				graphics.fillRect((x + Actions.panX) * 16, GameWindow.height - (y * 16) - 8, 16, 4);
+				graphics.setColor(Color.red);
+				graphics.fillRect((x + Actions.panX) * 16, GameWindow.height - (y * 16) - 8, (int) (lives * 1.6), 4);
+			}
+
+			graphics.setColor(Color.cyan);
+			graphics.fillRect((x + Actions.panX) * 16, (GameWindow.height - (y * 16)), 16, 16);
+			if (Actions.time * Actions.time / 10 % 200 > 10)
+				graphics.setColor(Color.BLACK);
+			graphics.fillRect((x + Actions.panX) * 16 + 3, GameWindow.height - (y * 16) + 5, 3, 3);
+			graphics.fillRect((x + Actions.panX) * 16 + 10, GameWindow.height - (y * 16) + 5, 3, 3);
+		}
 		graphics.setColor(Color.gray);
-		graphics.fillRect((GameWindow.width-500)/2 - 1, GameWindow.height - 101, 498, 48);
+		graphics.fillRect((GameWindow.width - 500) / 2 - 1, GameWindow.height - 101, 498, 48);
 
-		
-		graphics.setColor(Color.black);
-		graphics.fillRect((GameWindow.width/2) - 241, GameWindow.height-91, 32, 32);
 		graphics.setColor(Color.GRAY.darker());
-		graphics.fillRect((GameWindow.width/2) - 242, GameWindow.height-92, 30, 30);
-		Actions.drawInt(graphics, (GameWindow.width/2) - 232, GameWindow.height-82,inventory[0]+"");
-		
-		graphics.setColor(Color.red.darker());
-		graphics.fillRect((GameWindow.width/2) - 191, GameWindow.height-91, 32, 32);
+		graphics.fillRect((GameWindow.width / 2) - 242, GameWindow.height - 92, 30, 30);
+		Actions.drawInt(graphics, (GameWindow.width / 2) - 232, GameWindow.height - 82, inventory[0] + "");
+
 		graphics.setColor(Color.red);
-		graphics.fillRect((GameWindow.width/2) - 192, GameWindow.height-92, 30, 30);
-		Actions.drawInt(graphics, (GameWindow.width/2) - 182, GameWindow.height-82,inventory[1]+"");		
-		
-		graphics.setColor(Color.green.darker());
-		graphics.fillRect((GameWindow.width/2) - 141, GameWindow.height-91, 32, 32);
+		graphics.fillRect((GameWindow.width / 2) - 192, GameWindow.height - 92, 30, 30);
+		Actions.drawInt(graphics, (GameWindow.width / 2) - 182, GameWindow.height - 82, inventory[1] + "");
+
 		graphics.setColor(Color.green);
-		graphics.fillRect((GameWindow.width/2) - 142, GameWindow.height-92, 30, 30);
-		Actions.drawInt(graphics, (GameWindow.width/2) - 132, GameWindow.height-82,inventory[2]+"");	}
+		graphics.fillRect((GameWindow.width / 2) - 142, GameWindow.height - 92, 30, 30);
+		Actions.drawInt(graphics, (GameWindow.width / 2) - 132, GameWindow.height - 82, inventory[2] + "");
+
+		graphics.setColor(Color.orange);
+		graphics.fillRect((GameWindow.width / 2) - 92, GameWindow.height - 92, 30, 30);
+		Actions.drawInt(graphics, (GameWindow.width / 2) - 82, GameWindow.height - 82, inventory[4] + "");
+	}
 }

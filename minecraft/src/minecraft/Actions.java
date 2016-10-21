@@ -7,8 +7,6 @@ import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 
-import javax.swing.JOptionPane;
-
 public class Actions implements KeyListener, MouseListener {
 	static char keyPressed;
 	static boolean keyIsPressed;
@@ -19,6 +17,7 @@ public class Actions implements KeyListener, MouseListener {
 	static int panX;
 	static int panY;
 	static boolean[][][] text = new boolean[10][3][5];
+
 	{
 
 		text[0][0][0] = true;
@@ -52,7 +51,7 @@ public class Actions implements KeyListener, MouseListener {
 		text[1][0][4] = true;
 		text[1][1][4] = true;
 		text[1][2][4] = true;
-		
+
 		text[2][0][0] = true;
 		text[2][1][0] = true;
 		text[2][2][0] = true;
@@ -112,7 +111,7 @@ public class Actions implements KeyListener, MouseListener {
 		text[5][2][2] = true;
 		text[5][0][3] = false;
 		text[5][1][3] = false;
-		text[5][2][3] = true;	
+		text[5][2][3] = true;
 		text[5][0][4] = true;
 		text[5][1][4] = true;
 		text[5][2][4] = true;
@@ -192,16 +191,36 @@ public class Actions implements KeyListener, MouseListener {
 		graphics.setColor(Color.lightGray);
 		for (int i = 0; i < display.length(); i++) {
 			switch (display.charAt(i)) {
-			case '0':digitValue = 0; break;
-			case '1':digitValue = 1;break;
-			case '2':digitValue = 2;break;
-			case '3':digitValue = 3;break;
-			case '4':digitValue = 4;break;
-			case '5':digitValue = 5;break;
-			case '6':digitValue = 6;break;
-			case '7':digitValue = 7;break;
-			case '8':digitValue = 8;break;
-			case '9':digitValue = 9;break;
+			case '0':
+				digitValue = 0;
+				break;
+			case '1':
+				digitValue = 1;
+				break;
+			case '2':
+				digitValue = 2;
+				break;
+			case '3':
+				digitValue = 3;
+				break;
+			case '4':
+				digitValue = 4;
+				break;
+			case '5':
+				digitValue = 5;
+				break;
+			case '6':
+				digitValue = 6;
+				break;
+			case '7':
+				digitValue = 7;
+				break;
+			case '8':
+				digitValue = 8;
+				break;
+			case '9':
+				digitValue = 9;
+				break;
 			}
 			for (int j = 0; j < 3; j++) {
 				for (int k = 0; k < 5; k++) {
@@ -221,7 +240,6 @@ public class Actions implements KeyListener, MouseListener {
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
 		keyPressed = (char) e.getKeyCode();
-		System.out.println(keyPressed);
 		keyIsPressed = true;
 	}
 

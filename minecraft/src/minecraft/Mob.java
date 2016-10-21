@@ -4,24 +4,25 @@ import java.awt.Color;
 import java.awt.Graphics;
 
 public class Mob {
-	int x = 50;
+	int x = 55;
 	int y = 10;
-	
-	int placeBlockType;
+
+	int placeBlockType = 3;
 	int[] inventory = new int[10];
 	char control = '?';
+	int lives;
 	AI ai = new AI();
+
 	Mob() {
 
 	}
 
 	void placeBlock(int x, int y, int type) {
-		if (true||inventory[type] > 0 || type == 3) {
+		if (true || inventory[type] > 0 || type == 3) {
 			if (type == 3)
 				inventory[GamePanel.blocks[this.x + x][this.y + y].type]++;
 
 			GamePanel.blocks[this.x + x][this.y + y].type = type;// 1
-			System.out.println("0:" + inventory[0] + "; 1:" + inventory[1] + "; 2:" + inventory[2]);
 			inventory[type]--;
 		}
 	}
@@ -30,7 +31,6 @@ public class Mob {
 		char control = ai.Command();
 		ai.setX(x);
 		ai.setY(y);
-		System.out.println(Player.x+" "+x);
 		if (ai.commandIsSending()) {
 			if (control == 'A' && GamePanel.blocks[x - 1][y].type == 3) {
 				this.x--;
@@ -43,7 +43,7 @@ public class Mob {
 				this.x++;
 				this.y++;
 			} else if (control == ' ') {
-				this.y++; 
+				this.y++;
 			}
 
 			switch (control) {
@@ -68,7 +68,7 @@ public class Mob {
 				break;
 			case 'b':
 				placeBlock(0, -1, placeBlockType);
-				break;			
+				break;
 			case 'c':
 				placeBlock(1, -1, placeBlockType);
 				break;
@@ -88,18 +88,20 @@ public class Mob {
 				placeBlock(1, 1, placeBlockType);
 			}
 		}
-		if (GamePanel.blocks[x][y - 1].type == 3||GamePanel.blocks[x][y - 1].type == 1) {
+		if (GamePanel.blocks[x][y - 1].type == 3 || GamePanel.blocks[x][y - 1].type == 1) {
 			y--;
 		}
-		
+
 	}
+
 	void draw(Graphics graphics) {
 		update();
-		graphics.setColor(Color.red.darker());
-		graphics.fillRect(x * 16, GameWindow.height - (y * 16), 16, 16);
-		graphics.setColor(Color.BLACK);
-		graphics.fillRect(x * 16+3, GameWindow.height - (y * 16)+5, 4, 2);
-		graphics.fillRect(x * 16+10, GameWindow.height - (y * 16)+5, 4, 2);
 
-		}
+		graphics.setColor(Color.red.darker());
+		graphics.fillRect((x + Actions.panX) * 16, GameWindow.height - (y * 16), 16, 16);
+		graphics.setColor(Color.BLACK);
+		graphics.fillRect((x + Actions.panX) * 16 + 3, GameWindow.height - (y * 16) + 5, 4, 2);
+		graphics.fillRect((x + Actions.panX) * 16 + 10, GameWindow.height - (y * 16) + 5, 4, 2);
+
+	}
 }

@@ -3,11 +3,14 @@ package minecraft;
 import java.awt.Color;
 import java.awt.Graphics;
 
+import javax.swing.JOptionPane;
+
 public class Player {
 	static int x = 10;
 	static int y = 10;
 	int placeBlockType;
 	int[] inventory = new int[10];
+	static long time;
 	static float lives = 10;
 
 	Player() {
@@ -21,8 +24,8 @@ public class Player {
 	 * place/destroy blocks press 3 to destroy blocks and 2 or 1 to place them.
 	 * 
 	 */
-	void hurt() {
-		lives--;
+	static void hurt(int amount) {
+		lives-=amount;
 	}
 
 	void placeBlock(int x, int y, int type) {
@@ -35,8 +38,9 @@ public class Player {
 	}
 
 	void update() {
-		System.out.println(Actions.panX);
-
+		time++;
+		
+		System.out.println(time);
 		Actions.time++;
 		if ((x + Actions.panX - 1) * 16 > 1920)
 			Actions.panX -= 1920 / 16;
@@ -77,7 +81,7 @@ public class Player {
 				placeBlockType = 4;
 				break;
 			case 'B':
-				hurt();
+				hurt(1);
 				break;
 			// block placing controls
 			case 'a':
@@ -146,47 +150,58 @@ public class Player {
 		update();
 		if (lives > 0) {
 			if (lives > 8) {
-				graphics.setColor(Color.green.darker().darker());
+				graphics.setColor(Color.GREEN.darker().darker());
 				graphics.fillRect((x + Actions.panX) * 16, GameWindow.height - (y * 16) - 8, 16, 4);
-				graphics.setColor(Color.green);
+				graphics.setColor(Color.GREEN);
 				graphics.fillRect((x + Actions.panX) * 16, GameWindow.height - (y * 16) - 8, (int) (lives * 1.6), 4);
 
 			} else if (lives > 3) {
-				graphics.setColor(Color.yellow.darker().darker());
+				graphics.setColor(Color.YELLOW.darker().darker());
 				graphics.fillRect((x + Actions.panX) * 16, GameWindow.height - (y * 16) - 8, 16, 4);
-				graphics.setColor(Color.yellow);
+				graphics.setColor(Color.YELLOW);
 				graphics.fillRect((x + Actions.panX) * 16, GameWindow.height - (y * 16) - 8, (int) (lives * 1.6), 4);
 			} else {
-				graphics.setColor(Color.red.darker().darker());
+				graphics.setColor(Color.RED.darker().darker());
 				graphics.fillRect((x + Actions.panX) * 16, GameWindow.height - (y * 16) - 8, 16, 4);
-				graphics.setColor(Color.red);
+				graphics.setColor(Color.RED);
 				graphics.fillRect((x + Actions.panX) * 16, GameWindow.height - (y * 16) - 8, (int) (lives * 1.6), 4);
 			}
 
-			graphics.setColor(Color.cyan);
+			graphics.setColor(Color.CYAN);
 			graphics.fillRect((x + Actions.panX) * 16, (GameWindow.height - (y * 16)), 16, 16);
 			if (Actions.time * Actions.time / 10 % 200 > 10)
 				graphics.setColor(Color.BLACK);
 			graphics.fillRect((x + Actions.panX) * 16 + 3, GameWindow.height - (y * 16) + 5, 3, 3);
 			graphics.fillRect((x + Actions.panX) * 16 + 10, GameWindow.height - (y * 16) + 5, 3, 3);
 		}
-		graphics.setColor(Color.gray);
+		else{
+			Actions.displayGameOver(graphics);
+		}
+		graphics.setColor(Color.GRAY);
 		graphics.fillRect((GameWindow.width - 500) / 2 - 1, GameWindow.height - 101, 498, 48);
 
 		graphics.setColor(Color.GRAY.darker());
 		graphics.fillRect((GameWindow.width / 2) - 242, GameWindow.height - 92, 30, 30);
 		Actions.drawInt(graphics, (GameWindow.width / 2) - 232, GameWindow.height - 82, inventory[0] + "");
 
-		graphics.setColor(Color.red);
+		graphics.setColor(Color.RED);
 		graphics.fillRect((GameWindow.width / 2) - 192, GameWindow.height - 92, 30, 30);
 		Actions.drawInt(graphics, (GameWindow.width / 2) - 182, GameWindow.height - 82, inventory[1] + "");
 
-		graphics.setColor(Color.green);
+		graphics.setColor(Color.GREEN);
 		graphics.fillRect((GameWindow.width / 2) - 142, GameWindow.height - 92, 30, 30);
 		Actions.drawInt(graphics, (GameWindow.width / 2) - 132, GameWindow.height - 82, inventory[2] + "");
 
-		graphics.setColor(Color.orange);
+		graphics.setColor(Color.ORANGE);
 		graphics.fillRect((GameWindow.width / 2) - 92, GameWindow.height - 92, 30, 30);
+		Actions.drawInt(graphics, (GameWindow.width / 2) - 82, GameWindow.height - 82, inventory[4] + "");
+		
+		
+		graphics.setColor(Color.YELLOW);
+		if(Player.time%1800>900)
+			graphics.setColor(Color.WHITE);
+		
+		graphics.fillRect((int) (Player.time%900)*(1920/900),0, 100, 100);
 		Actions.drawInt(graphics, (GameWindow.width / 2) - 82, GameWindow.height - 82, inventory[4] + "");
 	}
 }

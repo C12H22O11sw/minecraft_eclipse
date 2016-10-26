@@ -30,13 +30,19 @@ public class Block {
 		case 2:
 			graphics.setColor(Color.green);
 			break;
-		case 3:
-			graphics.setColor(Color.white);
-			break;
 		case 4:
 			graphics.setColor(Color.ORANGE);
 			break;
+
 		}
+
+		if(type == 3){
+			if(Player.time%1800<900)
+				graphics.setColor(Color.white);
+			else
+				graphics.setColor(Color.black);
+		}
+
 		graphics.fillRect(((x + Actions.panX) * 16), GameWindow.height - ((y + Actions.panY) * 16), 16, 16);
 
 	}

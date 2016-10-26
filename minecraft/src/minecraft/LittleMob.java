@@ -3,7 +3,7 @@ package minecraft;
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class Mob {
+public class LittleMob {
 	int x;
 	int y = 50;
 
@@ -13,7 +13,7 @@ public class Mob {
 	int lives;
 	MobControler ai = new MobControler();
 
-	Mob(int x) {
+	LittleMob(int x) {
 		this.x = x;
 	}
 
@@ -99,10 +99,10 @@ public class Mob {
 		if(ai.isAlive){
 			update();
 			graphics.setColor(Color.red);
-			graphics.fillRect((x + Actions.panX) * 16, GameWindow.height - (y * 16), 16, 16);
+			graphics.fillRect(8+(x + Actions.panX) * 16, 8+GameWindow.height - (y * 16), 8, 8);
 			graphics.setColor(Color.BLACK);
-			graphics.fillRect((x + Actions.panX) * 16 + 3, GameWindow.height - (y * 16) + 5, 4, 2);
-			graphics.fillRect((x + Actions.panX) * 16 + 10, GameWindow.height - (y * 16) + 5, 4, 2);
+			graphics.fillRect((x + Actions.panX) * 16 + 9, GameWindow.height - (y * 16) + 11, 2, 2);
+			graphics.fillRect((x + Actions.panX) * 16 + 12, GameWindow.height - (y * 16) + 11, 2, 2);
 		}
 	}
 }

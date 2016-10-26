@@ -23,7 +23,9 @@ public class GamePanel extends JPanel implements ActionListener {
 	Timer timer;
 	static Block[][] blocks = new Block[worldWidth][worldHeight];
 	Player player = new Player();
-	Mob mob = new Mob();
+	Mob[] mobs = new Mob[10];
+	BigMob mobD = new BigMob(300);
+	LittleMob mobE = new LittleMob(50);
 
 	GamePanel() {
 		timer = new Timer(50, this);
@@ -68,9 +70,9 @@ public class GamePanel extends JPanel implements ActionListener {
 				if (y < height)
 					if (y < 7)
 						blocks[x][y] = new Block(x, y, 1);
-					else if (y < 8 + x % 2)
+					else if (y < height / 3)
 						blocks[x][y] = new Block(x, y, 3);
-					else if (y < height - 4)
+					else if (y - 2 < height / 3)
 						blocks[x][y] = new Block(x, y, 0);
 					else if (y < height - 1)
 						blocks[x][y] = new Block(x, y, 4);
@@ -100,7 +102,15 @@ public class GamePanel extends JPanel implements ActionListener {
 		}
 		renderWorld(graphics);
 		player.draw(graphics);
-		// mob.draw(graphics);
+		for (int i = 0; i < 10; i++) {
+			if (Player.time % 1800 > 900) {
+				mobs[i].draw(graphics);
+			} else {
+				mobs[i] = new Mob(50*i);
+			}
+		}
+		mobD.draw(graphics);
+		mobE.draw(graphics);
 	}
 
 	@Override

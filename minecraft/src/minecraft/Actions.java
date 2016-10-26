@@ -230,6 +230,51 @@ public class Actions implements KeyListener, MouseListener {
 			}
 		}
 	}
+	static void displayGameOver(Graphics graphics){
+//		graphics.setColor(Color.RED);
+//		graphics.fillRect((1920-28*32)/2, (800-18*32)/2, 28*32, 18*32);
+//		graphics.setColor(Color.WHITE);
+//		graphics.fillRect((1920-26*32)/2, (800-16*32)/2, 26*32, 16*32);
+		graphics.setColor(Color.RED.darker());
+		graphics.fillRect((1920-24*32)/2, (800-12*32)/2, 1*32, 4*32);
+		graphics.fillRect((1920-22*32)/2, (800-14*32)/2, 4*32, 1*32);
+		graphics.fillRect((1920-22*32)/2, (800-4*32)/2, 4*32, 1*32);
+		graphics.fillRect((1920-16*32)/2, (800-8*32)/2, 1*32, 2*32);
+		graphics.fillRect((1920-18*32)/2, (800-8*32)/2, 1*32, 1*32);
+		graphics.fillRect((1920-12*32)/2, (800-12*32)/2, 1*32, 5*32);
+		graphics.fillRect((1920-4*32)/2, (800-12*32)/2, 1*32, 5*32);
+		graphics.fillRect((1920-10*32)/2, (800-14*32)/2, 3*32, 1*32);
+		graphics.fillRect((1920-10*32)/2, (800-8*32)/2, 3*32, 1*32);
+		graphics.fillRect((1920)/2, (800-14*32)/2, 1*32, 6*32);
+		graphics.fillRect((1920+8*32)/2, (800-14*32)/2, 1*32, 6*32);
+		graphics.fillRect((1920+6*32)/2, (800-12*32)/2, 1*32, 1*32);
+		graphics.fillRect((1920+4*32)/2, (800-10*32)/2, 1*32, 1*32);
+		graphics.fillRect((1920+2*32)/2, (800-12*32)/2, 1*32, 1*32);
+		graphics.fillRect((1920+12*32)/2, (800-14*32)/2, 1*32, 6*32);
+		graphics.fillRect((1920+12*32)/2, (800-14*32)/2, 5*32, 1*32);
+		graphics.fillRect((1920+12*32)/2, (800-10*32)/2, 5*32, 1*32);
+		graphics.fillRect((1920+12*32)/2, (800-4*32)/2, 5*32, 1*32);
+		graphics.fillRect((1920-20*32)/2, (800)/2, 3*32, 1*32);
+		graphics.fillRect((1920-20*32)/2, (800+10*32)/2, 3*32, 1*32);
+		graphics.fillRect((1920-22*32)/2, (800+2*32)/2, 1*32, 4*32);
+		graphics.fillRect((1920-14*32)/2, (800+2*32)/2, 1*32, 4*32);
+		graphics.fillRect((1920-20*32)/2, (800+10*32)/2, 3*32, 1*32);
+		graphics.fillRect((1920-10*32)/2, (800)/2, 1*32, 3*32);
+		graphics.fillRect((1920-8*32)/2, (800+6*32)/2, 1*32, 3*32);
+		graphics.fillRect((1920-2*32)/2, (800)/2, 1*32, 3*32);
+		graphics.fillRect((1920-4*32)/2, (800+6*32)/2, 1*32, 3*32);
+		graphics.fillRect((1920-6*32)/2, (800+10*32)/2, 1*32, 1*32);
+		graphics.fillRect((1920+2*32)/2, (800)/2, 1*32, 6*32);
+		graphics.fillRect((1920+2*32)/2, (800)/2, 5*32, 1*32);
+		graphics.fillRect((1920+2*32)/2, (800+4*32)/2, 5*32, 1*32);
+		graphics.fillRect((1920+2*32)/2, (800+10*32)/2, 5*32, 1*32);
+		graphics.fillRect((1920+14*32)/2, (800)/2, 1*32, 6*32);
+		graphics.fillRect((1920+14*32)/2, (800)/2, 4*32, 1*32);
+		graphics.fillRect((1920+22*32)/2, (800+2*32)/2, 1*32, 2*32);
+		graphics.fillRect((1920+14*32)/2, (800+6*32)/2, 4*32, 1*32);
+		graphics.fillRect((1920+18*32)/2, (800+8*32)/2, 1*32, 1*32);
+		graphics.fillRect((1920+20*32)/2, (800+10*32)/2, 1*32, 1*32);
+	}
 
 	@Override
 	public void keyTyped(KeyEvent e) {

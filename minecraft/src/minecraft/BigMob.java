@@ -3,7 +3,7 @@ package minecraft;
 import java.awt.Color;
 import java.awt.Graphics;
 
-public class Mob {
+public class BigMob {
 	int x;
 	int y = 50;
 
@@ -11,9 +11,9 @@ public class Mob {
 	int[] inventory = new int[10];
 	char control = '?';
 	int lives;
-	MobControler ai = new MobControler();
+	BigMobControler ai = new BigMobControler();
 
-	Mob(int x) {
+	BigMob(int x) {
 		this.x = x;
 	}
 
@@ -90,6 +90,7 @@ public class Mob {
 			}
 		}
 		if (GamePanel.blocks[x][y - 1].type == 3 || GamePanel.blocks[x][y - 1].type == 1) {
+			if (GamePanel.blocks[x][y].type == 3 || GamePanel.blocks[x][y].type == 1)
 			y--;
 		}
 
@@ -98,11 +99,11 @@ public class Mob {
 	void draw(Graphics graphics) {
 		if(ai.isAlive){
 			update();
-			graphics.setColor(Color.red);
-			graphics.fillRect((x + Actions.panX) * 16, GameWindow.height - (y * 16), 16, 16);
+			graphics.setColor(Color.red.darker());
+			graphics.fillRect((x + Actions.panX) * 16, GameWindow.height - (y * 16)-16, 32, 32);
 			graphics.setColor(Color.BLACK);
-			graphics.fillRect((x + Actions.panX) * 16 + 3, GameWindow.height - (y * 16) + 5, 4, 2);
-			graphics.fillRect((x + Actions.panX) * 16 + 10, GameWindow.height - (y * 16) + 5, 4, 2);
+			graphics.fillRect((x + Actions.panX) * 16 + 11, GameWindow.height - (y * 16) + 5, 4, 2);
+			graphics.fillRect((x + Actions.panX) * 16 + 18, GameWindow.height - (y * 16) + 5, 4, 2);
 		}
 	}
 }

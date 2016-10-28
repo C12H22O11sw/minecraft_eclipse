@@ -103,14 +103,19 @@ public class GamePanel extends JPanel implements ActionListener {
 		renderWorld(graphics);
 		player.draw(graphics);
 		for (int i = 0; i < 10; i++) {
-			if (Player.time % 1800 > 900) {
+			if (Player.time % 3600 > 1800) {
 				mobs[i].draw(graphics);
 			} else {
-				mobs[i] = new Mob(50*i);
+				mobs[i] = new Mob(50 * i);
 			}
 		}
-		mobD.draw(graphics);
-		mobE.draw(graphics);
+		if (Player.time % 3600 > 1800) {
+			mobD.draw(graphics);
+			mobE.draw(graphics);
+		} else {
+			mobD = new BigMob(50);
+			mobE = new LittleMob(50);
+		}
 	}
 
 	@Override

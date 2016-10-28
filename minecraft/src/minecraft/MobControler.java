@@ -8,9 +8,10 @@ public class MobControler {
 	boolean isAlive = true;
 
 	void update() {
-		if(y<1){
+		if (GamePanel.blocks[x][y].type == 1) {
 			isAlive = false;
-			y=50;
+			y = 50;
+			Player.score += 5;
 		}
 		if (isAlive) {
 			if (Player.x - x < -1) {
@@ -29,7 +30,7 @@ public class MobControler {
 					isAlive = false;
 					for (int i = -1; i < 2; i++) {
 						for (int j = -1; j < 2; j++) {
-							GamePanel.blocks[x+i][y+j].type = 3;
+							GamePanel.blocks[x + i][y + j].type = 3;
 						}
 					}
 				}

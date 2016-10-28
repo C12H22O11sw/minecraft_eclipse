@@ -36,8 +36,8 @@ public class Block {
 
 		}
 
-		if(type == 3){
-			if(Player.time%1800<900)
+		if (type == 3) {
+			if (Player.time % 3600 < 1800)
 				graphics.setColor(Color.white);
 			else
 				graphics.setColor(Color.black);

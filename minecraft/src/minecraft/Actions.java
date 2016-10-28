@@ -94,7 +94,7 @@ public class Actions implements KeyListener, MouseListener {
 		text[4][1][2] = false;
 		text[4][2][2] = true;
 		text[4][0][3] = true;
-		text[4][0][3] = true;
+		text[4][1][3] = true;
 		text[4][2][3] = true;
 		text[4][0][4] = false;
 		text[4][1][4] = false;
@@ -139,14 +139,14 @@ public class Actions implements KeyListener, MouseListener {
 		text[7][1][1] = false;
 		text[7][2][1] = true;
 		text[7][0][2] = false;
-		text[7][1][2] = false;
-		text[7][2][2] = true;
+		text[7][1][2] = true;
+		text[7][2][2] = false;
 		text[7][0][3] = false;
-		text[7][1][3] = false;
-		text[7][2][3] = true;
+		text[7][1][3] = true;
+		text[7][2][3] = false;
 		text[7][0][4] = false;
-		text[7][1][4] = false;
-		text[7][2][4] = true;
+		text[7][1][4] = true;
+		text[7][2][4] = false;
 
 		text[8][0][0] = true;
 		text[8][1][0] = true;
@@ -186,7 +186,7 @@ public class Actions implements KeyListener, MouseListener {
 
 	}
 
-	static void drawInt(Graphics graphics, int x, int y, String display) {
+	static void drawInt(Graphics graphics, int x, int y, int size, String display) {
 		int digitValue = 0;
 		graphics.setColor(Color.lightGray);
 		for (int i = 0; i < display.length(); i++) {
@@ -225,55 +225,52 @@ public class Actions implements KeyListener, MouseListener {
 			for (int j = 0; j < 3; j++) {
 				for (int k = 0; k < 5; k++) {
 					if (text[digitValue][j][k])
-						graphics.fillRect(j * 3 + x + (i * 12), k * 3 + y, 3, 3);
+						graphics.fillRect(j * size + x + (i * size * 4), k * size + y, size, size);
 				}
 			}
 		}
 	}
-	static void displayGameOver(Graphics graphics){
-//		graphics.setColor(Color.RED);
-//		graphics.fillRect((1920-28*32)/2, (800-18*32)/2, 28*32, 18*32);
-//		graphics.setColor(Color.WHITE);
-//		graphics.fillRect((1920-26*32)/2, (800-16*32)/2, 26*32, 16*32);
+
+	static void displayGameOver(Graphics graphics) {
 		graphics.setColor(Color.RED.darker());
-		graphics.fillRect((1920-24*32)/2, (800-12*32)/2, 1*32, 4*32);
-		graphics.fillRect((1920-22*32)/2, (800-14*32)/2, 4*32, 1*32);
-		graphics.fillRect((1920-22*32)/2, (800-4*32)/2, 4*32, 1*32);
-		graphics.fillRect((1920-16*32)/2, (800-8*32)/2, 1*32, 2*32);
-		graphics.fillRect((1920-18*32)/2, (800-8*32)/2, 1*32, 1*32);
-		graphics.fillRect((1920-12*32)/2, (800-12*32)/2, 1*32, 5*32);
-		graphics.fillRect((1920-4*32)/2, (800-12*32)/2, 1*32, 5*32);
-		graphics.fillRect((1920-10*32)/2, (800-14*32)/2, 3*32, 1*32);
-		graphics.fillRect((1920-10*32)/2, (800-8*32)/2, 3*32, 1*32);
-		graphics.fillRect((1920)/2, (800-14*32)/2, 1*32, 6*32);
-		graphics.fillRect((1920+8*32)/2, (800-14*32)/2, 1*32, 6*32);
-		graphics.fillRect((1920+6*32)/2, (800-12*32)/2, 1*32, 1*32);
-		graphics.fillRect((1920+4*32)/2, (800-10*32)/2, 1*32, 1*32);
-		graphics.fillRect((1920+2*32)/2, (800-12*32)/2, 1*32, 1*32);
-		graphics.fillRect((1920+12*32)/2, (800-14*32)/2, 1*32, 6*32);
-		graphics.fillRect((1920+12*32)/2, (800-14*32)/2, 5*32, 1*32);
-		graphics.fillRect((1920+12*32)/2, (800-10*32)/2, 5*32, 1*32);
-		graphics.fillRect((1920+12*32)/2, (800-4*32)/2, 5*32, 1*32);
-		graphics.fillRect((1920-20*32)/2, (800)/2, 3*32, 1*32);
-		graphics.fillRect((1920-20*32)/2, (800+10*32)/2, 3*32, 1*32);
-		graphics.fillRect((1920-22*32)/2, (800+2*32)/2, 1*32, 4*32);
-		graphics.fillRect((1920-14*32)/2, (800+2*32)/2, 1*32, 4*32);
-		graphics.fillRect((1920-20*32)/2, (800+10*32)/2, 3*32, 1*32);
-		graphics.fillRect((1920-10*32)/2, (800)/2, 1*32, 3*32);
-		graphics.fillRect((1920-8*32)/2, (800+6*32)/2, 1*32, 3*32);
-		graphics.fillRect((1920-2*32)/2, (800)/2, 1*32, 3*32);
-		graphics.fillRect((1920-4*32)/2, (800+6*32)/2, 1*32, 3*32);
-		graphics.fillRect((1920-6*32)/2, (800+10*32)/2, 1*32, 1*32);
-		graphics.fillRect((1920+2*32)/2, (800)/2, 1*32, 6*32);
-		graphics.fillRect((1920+2*32)/2, (800)/2, 5*32, 1*32);
-		graphics.fillRect((1920+2*32)/2, (800+4*32)/2, 5*32, 1*32);
-		graphics.fillRect((1920+2*32)/2, (800+10*32)/2, 5*32, 1*32);
-		graphics.fillRect((1920+14*32)/2, (800)/2, 1*32, 6*32);
-		graphics.fillRect((1920+14*32)/2, (800)/2, 4*32, 1*32);
-		graphics.fillRect((1920+22*32)/2, (800+2*32)/2, 1*32, 2*32);
-		graphics.fillRect((1920+14*32)/2, (800+6*32)/2, 4*32, 1*32);
-		graphics.fillRect((1920+18*32)/2, (800+8*32)/2, 1*32, 1*32);
-		graphics.fillRect((1920+20*32)/2, (800+10*32)/2, 1*32, 1*32);
+		graphics.fillRect((1920 - 24 * 32) / 2, (800 - 12 * 32) / 2, 1 * 32, 4 * 32);
+		graphics.fillRect((1920 - 22 * 32) / 2, (800 - 14 * 32) / 2, 4 * 32, 1 * 32);
+		graphics.fillRect((1920 - 22 * 32) / 2, (800 - 4 * 32) / 2, 4 * 32, 1 * 32);
+		graphics.fillRect((1920 - 16 * 32) / 2, (800 - 8 * 32) / 2, 1 * 32, 2 * 32);
+		graphics.fillRect((1920 - 18 * 32) / 2, (800 - 8 * 32) / 2, 1 * 32, 1 * 32);
+		graphics.fillRect((1920 - 12 * 32) / 2, (800 - 12 * 32) / 2, 1 * 32, 5 * 32);
+		graphics.fillRect((1920 - 4 * 32) / 2, (800 - 12 * 32) / 2, 1 * 32, 5 * 32);
+		graphics.fillRect((1920 - 10 * 32) / 2, (800 - 14 * 32) / 2, 3 * 32, 1 * 32);
+		graphics.fillRect((1920 - 10 * 32) / 2, (800 - 8 * 32) / 2, 3 * 32, 1 * 32);
+		graphics.fillRect((1920) / 2, (800 - 14 * 32) / 2, 1 * 32, 6 * 32);
+		graphics.fillRect((1920 + 8 * 32) / 2, (800 - 14 * 32) / 2, 1 * 32, 6 * 32);
+		graphics.fillRect((1920 + 6 * 32) / 2, (800 - 12 * 32) / 2, 1 * 32, 1 * 32);
+		graphics.fillRect((1920 + 4 * 32) / 2, (800 - 10 * 32) / 2, 1 * 32, 1 * 32);
+		graphics.fillRect((1920 + 2 * 32) / 2, (800 - 12 * 32) / 2, 1 * 32, 1 * 32);
+		graphics.fillRect((1920 + 12 * 32) / 2, (800 - 14 * 32) / 2, 1 * 32, 6 * 32);
+		graphics.fillRect((1920 + 12 * 32) / 2, (800 - 14 * 32) / 2, 5 * 32, 1 * 32);
+		graphics.fillRect((1920 + 12 * 32) / 2, (800 - 10 * 32) / 2, 5 * 32, 1 * 32);
+		graphics.fillRect((1920 + 12 * 32) / 2, (800 - 4 * 32) / 2, 5 * 32, 1 * 32);
+		graphics.fillRect((1920 - 20 * 32) / 2, (800) / 2, 3 * 32, 1 * 32);
+		graphics.fillRect((1920 - 20 * 32) / 2, (800 + 10 * 32) / 2, 3 * 32, 1 * 32);
+		graphics.fillRect((1920 - 22 * 32) / 2, (800 + 2 * 32) / 2, 1 * 32, 4 * 32);
+		graphics.fillRect((1920 - 14 * 32) / 2, (800 + 2 * 32) / 2, 1 * 32, 4 * 32);
+		graphics.fillRect((1920 - 20 * 32) / 2, (800 + 10 * 32) / 2, 3 * 32, 1 * 32);
+		graphics.fillRect((1920 - 10 * 32) / 2, (800) / 2, 1 * 32, 3 * 32);
+		graphics.fillRect((1920 - 8 * 32) / 2, (800 + 6 * 32) / 2, 1 * 32, 3 * 32);
+		graphics.fillRect((1920 - 2 * 32) / 2, (800) / 2, 1 * 32, 3 * 32);
+		graphics.fillRect((1920 - 4 * 32) / 2, (800 + 6 * 32) / 2, 1 * 32, 3 * 32);
+		graphics.fillRect((1920 - 6 * 32) / 2, (800 + 10 * 32) / 2, 1 * 32, 1 * 32);
+		graphics.fillRect((1920 + 2 * 32) / 2, (800) / 2, 1 * 32, 6 * 32);
+		graphics.fillRect((1920 + 2 * 32) / 2, (800) / 2, 5 * 32, 1 * 32);
+		graphics.fillRect((1920 + 2 * 32) / 2, (800 + 4 * 32) / 2, 5 * 32, 1 * 32);
+		graphics.fillRect((1920 + 2 * 32) / 2, (800 + 10 * 32) / 2, 5 * 32, 1 * 32);
+		graphics.fillRect((1920 + 14 * 32) / 2, (800) / 2, 1 * 32, 6 * 32);
+		graphics.fillRect((1920 + 14 * 32) / 2, (800) / 2, 4 * 32, 1 * 32);
+		graphics.fillRect((1920 + 22 * 32) / 2, (800 + 2 * 32) / 2, 1 * 32, 2 * 32);
+		graphics.fillRect((1920 + 14 * 32) / 2, (800 + 6 * 32) / 2, 4 * 32, 1 * 32);
+		graphics.fillRect((1920 + 18 * 32) / 2, (800 + 8 * 32) / 2, 1 * 32, 1 * 32);
+		graphics.fillRect((1920 + 20 * 32) / 2, (800 + 10 * 32) / 2, 1 * 32, 1 * 32);
 	}
 
 	@Override
